@@ -491,7 +491,94 @@ console.log(contarCedulas(18))
 
 /*
 21) Criar um programa para identificar o valor a ser pago por um plano de saúde dada a idade do conveniado
-considerando que todos pagam R$ 100 mais um adicional conforme a seguinte tabela: 1) crianças com menos
-de 10 anos pagam R$80; 2) conveniados com idade entre 10 e 30 anos pagam R$50; 3) conveniados com
-idade acima de 30 e até 60 anos pagam R$ 95; e 4) conveniados acima de 60 anos pagam R$130
+considerando que todos pagam R$ 100 mais um adicional conforme a seguinte tabela: 
+1) crianças com menos de 10 anos pagam R$80; 
+2) conveniados com idade entre 10 e 30 anos pagam R$50; 
+3) conveniados com idade acima de 30 e até 60 anos pagam R$ 95; e 
+4) conveniados acima de 60 anos pagam R$130
+*/
+
+const valorConvenio = (idade, valorBase = 100)  => {
+
+    if (idade <= 10) return `R$ ${Number(valorBase + 80).toFixed(2)}`
+    if (idade <= 30) return `R$ ${Number(valorBase + 50).toFixed(2)}`
+    if (idade <= 60) return `R$ ${Number(valorBase + 95).toFixed(2)}`
+
+    return `R$ ${Number(valorBase + 130).toFixed(2)}`
+}
+
+const idades = [8, 9, 10, 20, 30, 50, 60, 70]
+
+for (i in idades) {
+    console.log(`Idade: ${idades[i]} - ${valorConvenio(idades[i])} `)
+}
+
+/*
+22) Criar uma função para calcular o valor a ser pago de anuidade de uma associação. A função recebe como
+parâmetro um inteiro que representa o mês (1 - janeiro, 2 - fevereiro…) que foi paga e o valor da anuidade. A
+anuidade deve ser paga no mês de janeiro. Por mês, é cobrado 5% de juros (sob o regime de juros
+compostos). O retorno deve ser o valor a ser pago para o respectivo mês escolhido. 
+*/
+
+const calculaAnuidade = (mes, valorAnuidade) => {
+    
+    if (mes == 1) return `R$ ${valorAnuidade.toFixed(2)}`
+    
+    valorFinal = valorAnuidade
+    const taxaJuros = 5
+
+    for (i= 1; i < mes; i++){
+        valorFinal += (valorFinal * (taxaJuros / 100))
+    }
+
+    return `R$ ${Number(valorFinal).toFixed(2)}`
+
+}
+
+const valorAnuidade = 100.00
+
+for (let i=1; i <= 12; i++){
+    console.log(`Mês ${i}: ${calculaAnuidade(i,valorAnuidade)}`)
+}
+
+/*
+23) Escreva um algoritmo que leia o código de um aluno e suas três notas. Calcule a média ponderada do
+aluno, considerando que o peso para a maior nota seja 4 e para as duas restantes, 3. Mostre o código do
+aluno, suas três notas, a média calculada e uma mensagem "APROVADO" se a média for maior ou igual a 5 e
+"REPROVADO" se a média for menor que 5. Repita a operação até que o código lido seja negativo.
+*/
+
+
+/*
+36) Crie duas funções que recebem dois parâmetros, um vetor com apenas valores numéricos e um número
+inteiro. Faça com que a primeira função retorne outro vetor que será resultado da multiplicação de cada
+elemento pelo número passado como parâmetro. A segunda função fará o mesmo da primeira se e somente se
+o valor do elemento for maior que 5.
+*/
+
+
+/*
+37) Escreva duas funções, uma para progressão aritmética e uma para progressão geométrica que recebam
+como parâmetros um número n (número de termo), a1 (o primeiro termo) e r (a razão) e escreva os n termos ,
+bem como a soma dos elementos.
+*/
+
+/*
+38) Escreva uma função que receba dois parâmetros início e fim. Essa função deve imprimir todos os números
+ímpares que estão entre esses valores. Por padrão os valores devem ser 0 para início e 100 para fim. Atente
+para corrigir a ordem dos parâmetros caso a função receba o valor maior antes do menor.
+*/
+
+
+/*
+39) Crie uma função que receba dois vetores de igual tamanho e troque seus elementos de modo que o
+primeiro elemento do vetorA passe a ser o primeiro elemento do vetorB e vice versa e assim sucessivamente.
+Faça a troca sem utilizar uma variável auxiliar.
+*/
+
+
+/*
+40) Faça uma função que receba como parâmetro um vetor de notas e mostre os conceitos de cada uma de
+modo que de 0,0 a 4,9 seja atribuído o conceito D, de 5,0 a 6,9 seja atribuído o conceito C, de 7,0 a 8,9 o
+conceito B e de 9,0 a 10,0 o conceito A.
 */
