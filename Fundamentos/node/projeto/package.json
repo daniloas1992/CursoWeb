@@ -2,8 +2,9 @@
   "name": "CursoWeb",
   "version": "1.0.0",
   "description": "",
-  "main": "Teste.js",
+  "main": "src/servidor.js",
   "scripts": {
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/daniloas1992/CursoWeb/issues"
   },
-  "homepage": "https://github.com/daniloas1992/CursoWeb#readme"
+  "homepage": "https://github.com/daniloas1992/CursoWeb#readme",
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "express": "4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "1.14.11"
+  }
 }
