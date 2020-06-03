@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Exercícios HTML</title>
+</head>
+
+<body>
+    <header>
+        <h1>Exercícios HTML</h1>
+    </header>
+
+
+    <nav>
+        <!-- wm-nav = web-moderno-nav foi criado para ser executado no lugar do href. O href foi mantido para que o link continue com características de link-->
+        <a href wm-nav="exercicios/teste.html">00 - Teste</a>
+    </nav>
+
+    <section id="conteudo"></section>
+
+    <footer>Curso Web Moderno</footer>
+
+    <script>
+
+        //Busca todos os elementos com classe wm-nav
+        document.querySelectorAll('[wm-nav]').forEach(link => {
+
+            const conteudo = document.getElementById('conteudo')
+
+            link.onclick = function(e){ // Função relativo ao evento do click
+                e.preventDefault() // Cancela a ação padrão do click 
+
+                //Requisição Ajax do atributo 'wm-nav' da tag <a>:
+                fetch(link.getAttribute('wm-nav'))
+                .then(resp => resp.text()) // Promisse para receber o conteúdo html de onde o href aponta
+                .then(html => conteudo.innerHTML = html) // Promisse para carregar o conteúdo recebebido dentro da section de nome "conteudo"
+            }
+        })
+    </script>
+
+</body>
+
+</html>
