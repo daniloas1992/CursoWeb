@@ -1,0 +1,10 @@
+Para inciar o servidor HTTP:
+http-server .
+
+Para armazenar cache por 10 segundos:
+http-server -c-10 .
+
+Para NÃO armazenar cache:
+http-server -c-1 .
+
+

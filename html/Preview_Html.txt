@@ -1,0 +1,2 @@
+Para executar preview no VS Code:
+Ctrl + Shift + V
