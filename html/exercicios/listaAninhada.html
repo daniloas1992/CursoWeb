@@ -1,0 +1,52 @@
+<h1> Projeto</h1>
+
+<ul id="teste" class="tree">
+    <li><a href="" lista-ani-click>Backend</a>
+        <ul>
+            <li><a href="" lista-ani-click>app</a>
+                <ul>
+                    <li>produto.js</li>
+                    <li>usuario.js</li>
+                    <li>venda.js</li>
+                </ul>
+            </li>
+            <li><a href="" lista-ani-click>config</a>
+                <ul>
+                    <li>banco.js</li>
+                    <li>rotas.js</li>
+                    <li>servidor.js</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><a href="" lista-ani-click>Frontend</a>
+        <ul>
+            <li><a href="" lista-ani-click>public</a>
+                <ul>
+                    <li>app.css</li>
+                    <li>app.js</li>
+                    <li>index.html</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+<link rel="stylesheet" href="http://files.cod3r.com.br/curso-web/tree.css" />
+
+<script>
+
+    document.querySelectorAll('[lista-ani-click]').forEach(lista => {
+
+        lista.onclick = function(e) { 
+            e.preventDefault() 
+
+            const ul = lista.nextElementSibling
+            const displayAtual = ul.style.display
+            
+            ul.style.display = displayAtual === 'none' ? 'block' : 'none'
+        }
+    })
+</script>
+
