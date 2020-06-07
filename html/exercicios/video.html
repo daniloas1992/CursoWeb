@@ -1,0 +1,61 @@
+<h1>Vídeo</h1>
+
+<br>
+
+<video id="meuVideo" width="800" heigth="400p" controls autoplay controlsList="nodownload">
+    <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+    Formato de vídeo não suportado!
+</video>
+
+<div wm-progresso="meuVideo" class="progresso">
+    <div></div>
+</div>
+
+<div>
+    <button wm-play="meuVideo">Play</button>
+    <button wm-pause="meuVideo">Pause</button>
+</div>
+
+<style>
+    .progresso{
+        height: 20px;
+        width: 800px;
+        border: solid 1px #444;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .progresso > div {
+        background-color: red;
+        color: #fff;
+        height: 100%;
+        text-align: right;
+        font-size: 14px;
+        width: 0%;  /*Essa tag que irá controlar o progresso e deverá ser incrementada no decorrer do vídeo*/
+    }
+
+</style>
+
+<script>
+
+    function configurarVideo(id){
+        const video = document.getElementById(id)
+        video.oncontextmenu = () => false // Bloqueia a exibição do menu de contexto (Botão direito)
+
+        document.querySelector(`[wm-play=${id}]`).onclick = e => video.play()
+        document.querySelector(`[wm-pause=${id}]`).onclick = e => video.pause()
+
+        setInterval( () => {
+            const percentual = (video.currentTime / video.duration) * 100
+
+            const valorDiv = document.querySelector(`[wm-progresso=${id}] > div`) //Pega a div interna do progresso
+            valorDiv.style.width = `${percentual}%`
+            valorDiv.innerHTML = `${percentual.toFixed(1)}%` //Exibe texto com o percentual com 1 casa decimal
+
+        }, 500) //Atualiza a cada 500 milisegundos
+
+    }
+
+    configurarVideo('meuVideo') 
+
+</script>
