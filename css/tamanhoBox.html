@@ -4,8 +4,22 @@
     <meta charset="UTF-8">
     <title>Tamanho Box</title>
     <style>
+
+        /* Seletor universal vai ser aplicado em tudo*/
+        * {
+            box-sizing: border-box; /*O Conteúdo leva em considerado o tamanho do padding e border*/
+        }
         body {
             font-size: 45px;
+            margin: 0px;
+        }
+
+        div {
+            background-color: deepskyblue;
+            width: 100%;
+            height: 300px;
+            padding: 100px;
+            border: solid 20px;
         }
     </style>
 </head>

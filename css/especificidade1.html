@@ -5,12 +5,39 @@
     <meta charset="UTF-8">
     <title>Especificidade CSS</title>
     <style>
-        /* https://developer.mozilla.org/pt-BR/docs/Web/CSS/Specificity */
+        p {
+            background-color: #aaa;
+        }
+
+        .observacao {
+            background-color: #5F5;
+            border: dashed 5px;
+            padding: 200px!important;
+            font-size: 40px;
+            text-align: center;
+        }
+
+        p.observacao {
+            padding: 2px;
+            background: linear-gradient(to right, red, yellow);
+        }
+
     </style>
 </head>
 
 <body>
     <p class='observacao'>Olha essa observação!!!!</p>
+
+    <br>
+
+    <p>Ordem de Prioridade CSS</p>
+    <ol title="Ordem de Prioridade CSS">
+        <li>Regra com !important</li>
+        <li>Seletores mais específicos. Exemplo: Classe é mais específico que tag</li>
+        <li>Última regra processada (Empate)</li>
+    </ol>
+
+    <footer><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS/Specificity">Documentação Especificidades CSS</a></footer>
 </body>
 
 </html>
