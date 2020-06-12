@@ -6,16 +6,42 @@
     <title>Flexbox #03</title>
     <link rel="stylesheet" href="css/tag.css">
     <style>
-        /* ... */
+        div {
+            border: solid 5px dodgerblue;
+            font-size: 40px;
+        }
+
+        .flex-container div {
+            box-sizing: border-box;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flex-container div {
+            flex-basis: 100px; /*Prodomina sobre width*/
+            width: 200px; /*Perde para flex-basis */
+        }
+
+        .flex-containerdiv:nth-child(4) {
+            flex: 3 6 100px;  /*Grow Shrink Basis*/
+        }
+
+        .flex-container {
+            width: 300px;
+            width: 600px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="flex-container tag nolabel">
-        <div class="tag nolabel">1</div>
-        <div class="tag nolabel">2</div>
-        <div class="tag nolabel">3</div>
-        <div class="tag nolabel">4</div>
+    <div class="flex-container nolabel">
+        <div class="nolabel">1</div>
+        <div class="nolabel">2</div>
+        <div class="nolabel">3</div>
+        <div class="nolabel">4</div>
     </div>
     <script src="js/tag.js"></script>
 </body>
