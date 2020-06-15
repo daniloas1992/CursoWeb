@@ -22,7 +22,38 @@
         <p>Fim</p>
     </div>
     <script>
-        // ...
+        /* Criando uma função "log" para acessar o "console.log()" */
+        function log () {
+            console.log(this)
+        }
+        /*Criando prototype log para utilizar nos exemplos */
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+
+        const lista = document.querySelector('div ul')
+        lista.parentNode.log() /*Pega o primeiro elemento pai*/
+        lista.childNodes.log() /*Pega os elemnto filhos*/ /*Quebra de linha é pega como "texto" */
+
+        const primeiro = lista.firstChild /*Pega o priemiro elemento filho */
+        primeiro.log()
+        primeiro.nextSibling.log() /*Pega o primeiro irmão*/
+
+        const ultimo = lista.lastChild /*Pega o último elemento */
+        ultimo.log()
+        ultimo.previousSibling.log() /*Pega o irmão anterior*/
+
+        lista.children.log() /*Não pega as quebras de linhas ou espaços em branco*/
+
+        lista.firstElementChild.log()
+
+        lista.lastElementChild.log()
+
+        lista.parentNode.previousElementSibling.log()
+
+        lista.parentNode.nextElementSibling.log()
+
     </script>
 </body>
 

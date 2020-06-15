@@ -9,9 +9,36 @@
 
 <body class="conteudo exercicio">
     <div>
+        <!--Opção 1
+        <a href="https://google.com.br" onclick="navegarEm5s(event)">Google</a>
+        -->
+
+        <!--Opção 2
         <a href="https://google.com.br">Google</a>
+        -->
+
+         <!--Opção 3 -->
+        <a espera-um-pouco href="https://google.com.br">Google</a>
+
     </div>
     <script>
-        // ...
+        
+        function navegarEm5s(e) {
+            e.preventDefault()
+            console.log('Saindo em 5 segundos...')
+            setTimeout(() => {
+                const link = e.target /*Pega o conteúdo do evento, que é o link*/
+                window.location.href = link.href /*Altera o conteúdo da barra de navegação do browser*/
+            }, 5000)
+        }
+
+        /*Opção 2*/
+        //const a = document.querySelector('a')
+        //a.onclick = navegarEm5s
+
+        /*Opção 3*/
+        const a = document.querySelector('[espera-um-pouco]') /*Cria uma propriedade específica, ela é ignorada na renderização do HTML*/
+        a.onclick = navegarEm5s
+
     </script>
 </body>
