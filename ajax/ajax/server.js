@@ -35,6 +35,26 @@ app.post('/upload', (req, resp) => {
     })
 })
 
+
+app.post('/formulario', (req, resp) => {
+    resp.send({ //Envia como resposta
+        ...req.body, //Tudo o que veio de informação (Utilizou o spread-> ...)
+        id:1         //Mais um ID
+    })
+})
+
+app.get('/parOuImpar', (req, res) => {
+    /* Formas de se obter dados
+        req.body
+        req.query  -> Na url de envio seria localhost:8080/parOuImpar?numero=5
+        req.params -> /parOuImpar/:numero Na url de envio seria localhost:8080/parOuImpar/5
+    */
+   const par = parseInt(req.query.numero) % 2 === 0
+   res.send({
+       resultado: par ? 'par' : 'ímpar'
+   })
+})
+
 app.listen(8080, () => console.log('Executando...'))
 
 /* Para iniciar digitar no terminal npm start */
