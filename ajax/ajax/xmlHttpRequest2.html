@@ -22,6 +22,43 @@
     <div class="progresso"></div>
 
     <script>
-        // ...
+        function ajaxUpload(config) {
+
+            const xhr = new XMLHttpRequest()
+
+            if(xhr.upload) { // Se existir a opçãp de upload
+
+                xhr.upload.onprogress = e => {
+
+                    const atual = e.loaded
+                    const total = e.total
+
+                    const percentual = Math.floor(atual / total * 100)
+
+                    config.progresso({atual, total, percentual}) // Essa funcção vai ser passada no config
+                }
+            }
+
+            xhr.open("post", config.url, true) // Último parâmetro indica que é assíncrono
+            xhr.send(config.formData) // Vai enviar para o servidor o arquivo dentro do formData
+        }
+
+        // O envio do arquivo vai começar logo após ele ser selecionado
+        document.querySelector('input[type=file]').onchange = e => {
+            const formData = new FormData()
+            const inputFile = e.target
+            formData.append(inputFile.name, inputFile.files[0])
+            
+            ajaxUpload({
+                url: "upload", // Nome do endpoint
+                formData: formData,
+                progresso(dados) {
+    
+                    const progresso = document.querySelector('.progresso')
+                    progresso.innerHTML = JSON.stringify(dados)
+                }
+            })
+        }
+
     </script>
 </body>

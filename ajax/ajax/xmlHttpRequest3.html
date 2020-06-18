@@ -7,10 +7,67 @@
     <link rel='stylesheet' href='css/estilo.css'>
 </head>
 
+<!-- https://www.w3schools.com/xml/ajax_xmlhttprequest_response.asp
+
+    Holds the status of the XMLHttpRequest.
+        0: request not initialized
+        1: server connection established
+        2: request received
+        3: processing request
+        4: request finished and response is ready
+-->
+
 <body class="conteudo exercicio">
     <h1>Estados</h1>
 
     <script>
-        // ...
+        
+        
+        function ajax(config) {
+
+            const xhr = new XMLHttpRequest()
+
+            xhr.open(config.metodo, config.url, true)
+
+            xhr.onreadystatechange = e => {
+                if (xhr.readyState === 4) { // Status 4 significa que a resposta está pronta
+                    if(xhr.status === 200) {
+                        config.sucesso(xhr.responseXML) // Retorna um objeto de listas formatado em tags (XML)
+                    } else if (xhr.status >= 400) {
+                        config.erro({
+                            codigo: xhr.status,
+                            texto: xhr.statusText
+                        })
+                    }
+                }
+            }
+
+            xhr.send()
+        }
+
+        //Chamando a função
+        ajax({
+            url: "dados/estados.xml",
+            metodo: "get",
+            sucesso(resposta) {
+
+                const estados = resposta.getElementsByTagName('estado') /*No XML existem as tags <estado> */
+                
+                /*Converte os estados para um array para fazer o reduce pra transforma o array em um único elemento*/
+                const itens = Array.from(estados).reduce(
+                    //Vai pegar do xml apenas os values que são os nomes dos estados
+                    (html, estado) => html + `<li>${estado.attributes.nome.value}</li>`, '' // Precisa do espaço em branco no final para iniciar a string
+                )
+                
+                //itens é uma string com as tags e valores html de cada estado
+
+                //Insere antes de terminar o body em uma lista não ordenada
+                document.body.insertAdjacentHTML('beforeend', `<ul>${itens}</ul>`)
+            },
+            erro(e) {
+                const msg = document.createTextNode(`${e.codigo}:${e.texto}`)
+                document.body.appendChild(msg)
+            }
+        })
     </script>
 </body>
