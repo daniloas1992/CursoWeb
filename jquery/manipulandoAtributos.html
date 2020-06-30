@@ -23,6 +23,60 @@
     <h1>Manipulando Atributos</h1>
     <div wm-relogio='1000'></div>
     <script>
-        // ...
+
+        function Relogio(elemento) {
+
+            const horaCerta = $('<p>').html('0') // Cria uma tag <p> onde será exibida a hora
+            const botaoMenos = $('<button>').html('-') // Cria uma tag <button> pra desacelerar o relógio
+            const botaoMais = $('<button>').html('+') // Cria uma tag <button> pra acelerar o relógio
+
+            const $elemento = $(elemento) // Converte pra jQuery para utilizar os atributos de jQuery
+            
+            $elemento.append(horaCerta, botaoMenos, botaoMais) // Como é jQuery pode usar append
+            
+            const getIntervaloAtual = () => {
+                return parseInt($elemento.attr('wm-relogio')) //Obtém a string dentro de [wm-relogio], converte pra inteiro e retorna
+            }
+
+            let temporizador = null // Deixa o temporizador null
+
+            const iniciar = () => {
+
+                if(temporizador) { // Se o temporizador estiver nullo ou vazio
+                    clearInterval(temporizador) // Limpa
+                }
+
+                temporizador = setInterval(() => { // Atualiza o temporizador
+                    horaCerta.html(new Date().toLocaleString('pt-BR'))
+                }, getIntervaloAtual()) // De acordo com o tempo que getIntervaloAtual retornar
+            }
+
+            //Controle dos botões:
+            const alterarIntervalo = delta => {
+                const novo = Math.max(getIntervaloAtual() + delta, 1000) //o intervalo mínimo é de 1000, por isos pega o maior valor entre o (resultado da função ou 1000)
+                $elemento.attr('wm-relogio', novo) // troca o valor de [wm-relogio]
+
+                iniciar()
+            }
+
+            botaoMenos.click(e => alterarIntervalo(1000))
+            botaoMais.click(e => alterarIntervalo(-1000)) // Se clicar em "+" diminui o intervalo de atualização, ou seja, fica mais rápido
+            
+            iniciar() // Inicia a primeira vez
+
+        }
+
+        // Localiza o elemento (tag) onde o relógio vai ficar e passa esse elemento pra função que vai criar o relógio (Adicionar os elementos internos)
+        $('[wm-relogio]').each((i,e) => new Relogio(e))
+
+        //Para adicionar ou alterar atributos em um elemento:
+        $('[wm-relogio]').attr('novoAtributo', 123)
+        //Para ler o valor de um atributo:
+        $('[wm-relogio]').attr('novoAtributo')
+        //Para adicionar mais de um atributo ao mesmo tempo
+        $('[wm-relogio]').attr({atributo1: 456, atributo2: 789})
+        //Para remover o atributo de um elemento
+        $('[wm-relogio]').removeAttr('novoAtributo').removeAttr('atributo1').removeAttr('atributo2')
+        
     </script>
 </body>

@@ -12,9 +12,26 @@
     <h1>Manipulando CSS</h1>
     <div id='div1'>1</div>
     <div id='div2'>2</div>
-    <div id='div3'>3</div>
     <div id='resultado'></div>
     <script>
-        // ...
+        const fonte = $('#div1').css('font-family') // COmo não passouum sgundo parâmetro significa que quer ler o valor do atributo
+        $('#resultado').append(`Fonte é ${fonte}`)
+
+        $('#div1').css('font-size', '3em')
+
+        $('#div1').css({'font-size': '3em', 'color': 'yellow'})
+
+        $('#div1').css('font-size', function(){
+            return `${2*2}em`
+        })
+
+        $('#div2').addClass('destaque')
+
+        const temClasse = $('#div2').hasClass('destaque')
+        $('#resultado').append(`<br>Tem classe? ${temClasse}`)
+
+        $('#div2').removeClass('destaque')
+        $('#div2').toggleClass('destaque') // Se tiver remove, se não tiver adiciona
+        $('#div2').toggleClass('destaque') // Se tiver remove, se não tiver adiciona
     </script>
 </body>

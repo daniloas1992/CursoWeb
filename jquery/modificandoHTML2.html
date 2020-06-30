@@ -17,6 +17,32 @@
     <p class='numero'>5</p>
 
     <script>
-        // ...
+        $('#div1').append(', 2')
+        $('#div1').prepend('0, ')
+
+        $('<span> , 3</span>').appendTo('#div1')
+        $('<span>-1, </span>').prependTo('#div1')
+
+        $('#div2').before('<p>Antes do 2</p>')
+        $('#div2').after('<p>Depois do 2</p>')
+
+        $('<p>Antes de 3</p>').insertBefore('#div3')
+        $('<p>Depois de 3</p>').insertAfter('#div3')
+
+        //$('p.numero').wrap('<div>') // Envolve cada elemnto <p> com class "numero" em uma div cada um
+
+        $('p.numero').wrapAll('<div id="div4">') // Envolve todos elementos <p> com class "numero" em uma única div com ID = div4
+
+        $("#div4").empty()
+        $('#div3, #div4').prev().remove() //Pega os elementos anteriores da #div3 e #div4
+
+        //$('<div>Substituto</div>').replaceAll('body > p')
+        $('body > p').replaceWith('<div>Subtituto</div>') // Mesmo resultado que o anterior
+        
+        $('body > p').replaceWith(function (){
+            return $('<div>').html($(this).html()) // Pega o conteúdo de "this" que é o "p" dentro de "body" e coloca esse conteúdo dentro de uma <div>
+        })
+
+
     </script>
 </body>
