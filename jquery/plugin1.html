@@ -22,6 +22,32 @@
     </div>
 
     <script>
-        // ...
+        // Para garantir que ninguém utilize o "$" cria uma função auto-invocada
+        (function ($) {
+            $.fn.interpretar = function () {
+                const retirarChaves = s => s.substring(2, s.length - 2) // Remove os dois primeiros caracteres e os dois últimos carcteres.
+
+                const conteudo = $(this).html() //Pega o texto html
+
+                //Regex:   como a chave é caractere reservado precisa por escape "\" vai identificar começa com "{{" o ponto indica que pode ter qualquer coisa no meio mais término com "}}"
+                const expressoesComChaves = conteudo.match(/\{\{.+\}\}/g) // Vai identificar as combinações
+
+                const expressoes = expressoesComChaves.map(retirarChaves)
+
+                const resultados = expressoes.map(e => eval(e))
+
+                let conteudoFinal = conteudo //Pega o texto inicial e armazena em outra variável
+
+                for(let i = 0; i < expressoesComChaves.length; i++){
+                    conteudoFinal = conteudoFinal.replace(expressoesComChaves[i], resultados[i]) //Vai susbstituindo o conteúdo original pelo resultado do eval
+                }
+
+                $(this).html(conteudoFinal) // Substitui o conteúdo por conteudoFinal
+
+                return this
+            }
+        })(jQuery) // É uma funcção auto-invocada, e vai passar "jQuery" como parâmetro que vai ser carregado no "$"
+
+        $('div').interpretar()
     </script>
 </body>
